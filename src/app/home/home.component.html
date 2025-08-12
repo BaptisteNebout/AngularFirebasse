@@ -1,0 +1,18 @@
+<p>home works!</p>
+<!--bouton de connexion et de deconnexion-->
+<button *ngIf="!(user$ | async)" (click)="loginWithGoogle()">Se connecter avec Google</button>
+<button *ngIf="user$ | async" (click)="logout()">Logout</button>
+
+<!-- formulaire d'inscription -->
+<input email="email" placeholder="Email" type="email" required>
+<input password="password" placeholder="Mot de passe" type="password" required>
+<button (click)="register(email, password)">S'inscrire</button>
+
+<!--affichage du user connecté-->
+<div *ngIf="user$ | async as user">
+    <p>Email : {{ user.email }}</p>
+    <p *ngIf="accessToken">Token : {{ accessToken }}</p>
+    <p *ngIf="!accessToken">Token indisponible</p>
+    <p>First Name : {{ user.displayName ? user.displayName.split(' ')[0] : '' }}</p>
+    <p>Last Name : {{ user.displayName ? user.displayName.split(' ')[1] : '' }}</p>
+</div>
